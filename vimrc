@@ -1,0 +1,98 @@
+" This must be first, because it changes other options as side effect
+set nocompatible
+set number
+" Use pathogen to easily modify the runtime path to include all
+" plugins under the ~/.vim/bundle directory
+call pathogen#runtime_append_all_bundles()
+
+" change the mapleader from \ to ,
+let mapleader=","
+
+" hide buffers instead of closing them
+set hidden
+
+"set nowrap        " don't wrap lines
+
+set softtabstop=4
+set expandtab
+set backspace=indent,eol,start
+"set backspace=2   " allow backspace beyond insertion point
+                  " allow backspacing over everything in insert mode
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set number        " always show line numbers
+set shiftwidth=4  " number of spaces to use for autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch     " set show matching parenthesis
+set ignorecase    " ignore case when searching
+set smartcase     " ignore case if search pattern is all lowercase,
+                  "    case-sensitive otherwise
+set smarttab      " insert tabs on the start of a line according to
+                  "    shiftwidth, not tabstop
+set hlsearch      " highlight search terms
+set incsearch     " show search matches as you type
+
+set background=dark     " console bg is dark
+set clipboard+=unnamed  " put yanks/etc on the clipboard
+set encoding=utf-8      " unicode
+set formatoptions=cqrt2 " continue comment headers when line wraps
+set guioptions+=f       " don't fork
+set laststatus=1        " never show status line
+set ruler               " display cursor position
+set showcmd
+set shortmess=at        " shortens messages to avoid 'press a key' prompt 
+set timeout             " allow keys to timeout
+set timeoutlen=3000     " timeout after 3s
+
+set foldlevelstart=99   " start with all folds open
+set foldopen-=search    " don't open folds when you search into them
+set foldopen-=undo      " don't open folds when you undo stuff
+
+set history=1000        " remember more commands and search history
+set undolevels=1000     " use many muchos levels of undo
+set wildignore=*.swp,*.bak,*.pyc,*.class
+set title               " change the terminal's title
+set visualbell          " don't beep
+set noerrorbells        " don't beep
+
+set nobackup
+set noswapfile
+
+"set textwidth=79                         " set normal border; can unset for coding
+
+filetype plugin indent on
+
+if &t_Co >= 256 || has("gui_running")
+   colorscheme my_black 
+endif
+
+if &t_Co > 2 || has("gui_running")
+   " switch syntax highlighting on, when the terminal has colors
+   syntax on
+   colorscheme darkblue 
+   set rs
+endif
+
+" set list
+" set listchars=trail:.,extends:#,nbsp:.
+
+set mouse=a
+
+
+""  set various script options
+"let perl_fold=1                        " allow perl folding
+
+" map <C-x> ggVGg?
+
+if has("gui_running")
+  if has("macunix")
+        set guifont=Monaco:h10
+        " set transparency=240
+  elseif has("win32")
+        set guifont=ProFontWindows:h11:b:cANSI,Lucida_Console:h11:b:cANSI
+  elseif has("x11")
+        set guifont=-jmk-neep-bold-r-normal--15-*-*-*-*-*-*-*
+  endif
+endif
+
+source ~/.vim/plugins/emodeline.vim

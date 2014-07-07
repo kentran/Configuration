@@ -1,0 +1,38 @@
+use strict;
+
+my $file = "OurList.rtf";
+open(INFO, $file);
+my @line = <INFO>;
+close(INFO);
+print @line;
+print "\n";
+
+my $input = "List.rtf";
+open(INFO, $input);
+my @line2 = <INFO>;
+close(INFO);
+print @line2;
+print "\n";
+
+my @line1;
+for (my $j=0; $j<$#line; $j++) {
+        @line1[$j] = split(/\\/, $line[$j]);
+	#print @line1;
+}
+print @line1;
+my %hash;
+@hash{@line1} = ();
+
+
+print "\nHere is the new list:\n";
+print "\n";
+for (my $i=0; $i<$#line2; $i++) {
+	my @elements = split(" ", $line2[$i]);
+	my $element =  $elements[1];
+	print "$element \n" unless exists $hash{$element};
+}
+
+my $output = "NewList.rtf";
+open(INFO, ">$output");
+print INFO "@line";
+close(INFO);
